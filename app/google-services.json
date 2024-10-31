@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "206001593965",
+    "project_id": "sms-bot-77aaf",
+    "storage_bucket": "sms-bot-77aaf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:206001593965:android:c0b2e975f311535201e964",
+        "android_client_info": {
+          "package_name": "com.example.smssendingbot"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD56hurCcYH4v2iaE_if3ytz-HtY-8bb6g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
