@@ -28,38 +28,42 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-public class SmsReceiver extends BroadcastReceiver {
-    private HashMap<String, String> messageParts = new HashMap<>(); // this is for add large msg
+public class SmsReceiver extends BroadcastReceiver { ; // this is for add large msg
 
     @Override
     public void onReceive(Context context, Intent intent) {
         final Bundle bundle = intent.getExtras();
         Log.d("smsBroadcast", "onReceive called()");
 
+        // make variable before loop
+        StringBuilder messageBody= new StringBuilder();
+        String sender="";
+        String smsTime="";
+
         try {
             if (bundle != null) {
-
                 Object[] pdus = (Object[]) bundle.get("pdus");
+
                 if (pdus != null) {
+
                     for (Object pdu : pdus) {
                         SmsMessage smsMessage = SmsMessage.createFromPdu((byte[]) pdu, bundle.getString("format"));
-                        String sender = smsMessage.getDisplayOriginatingAddress();
-                        String messageBody = smsMessage.getMessageBody();
+                         sender = smsMessage.getDisplayOriginatingAddress();
+
+                         messageBody.append(smsMessage.getMessageBody()); // stringbuilder will add multipart msg to the messsagebody variable
 
                     // get time as millisecond
                         //then format it so that it can be readable
                       long time = smsMessage.getTimestampMillis();
-                      String smsTime = DateFormat.getDateTimeInstance().format(new Date(time));
+                      smsTime = DateFormat.getDateTimeInstance().format(new Date(time));
 
 
                     Log.d("smsBroadcast", "senderNum: "+sender);
                         Log.d("smsBroadcast", "message: "+messageBody);
                         Log.d("smsBroadcast", "smsTime: "+smsTime);
-
-                        //sending sms to your server
-                        SendToServer (context, sender, messageBody, smsTime);
-
                     }
+                    //sending sms to your server
+                    SendToServer (context, sender, String.valueOf(messageBody), smsTime); //cast the msgbody stringbuilder to string
                 }
             }
         } catch (Exception e) {
