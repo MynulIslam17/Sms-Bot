@@ -58,10 +58,13 @@ public class SmsReceiver extends BroadcastReceiver { ; // this is for add large 
                       smsTime = DateFormat.getDateTimeInstance().format(new Date(time));
 
 
-                    Log.d("smsBroadcast", "senderNum: "+sender);
-                        Log.d("smsBroadcast", "message: "+messageBody);
-                        Log.d("smsBroadcast", "smsTime: "+smsTime);
+
                     }
+                    // check value to logcat
+                    Log.d("smsBroadcast", "senderNum: "+sender);
+                    Log.d("smsBroadcast", "message: "+messageBody);
+                    Log.d("smsBroadcast", "smsTime: "+smsTime);
+
                     //sending sms to your server
                     SendToServer (context, sender, String.valueOf(messageBody), smsTime); //cast the msgbody stringbuilder to string
                 }
@@ -105,8 +108,6 @@ public class SmsReceiver extends BroadcastReceiver { ; // this is for add large 
              return map;
          }
      };
-
-
 
         queue.add(stingReq);
 
